@@ -1,0 +1,36 @@
+* {
+    font-family: "Kaisei HarunoUmi", serif;
+}
+header {
+    margin-bottom: 1rem;
+    background: linear-gradient(
+      90deg,
+      rgba(149, 185, 222, 1) 0%,
+      rgba(57, 90, 136, 1) 31%,
+      rgba(53, 113, 143, 1) 73%,
+      rgba(149, 185, 222, 1) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 50px;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 50px;
+    margin: 10px;
+  }
+  button, select, input[type="text"] {
+    display: flex;
+    /* width: 100%; */
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin-block: 0.5rem;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+  }
