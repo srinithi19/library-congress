@@ -5,6 +5,8 @@ function getSearchResults(){
     var format = location.search.split("&")[0].split("=")[1];
     var queryStr = location.search.split("&")[1].split("=")[1];
 
+    $('#libName').text(queryStr);
+
     var urlStr = "https://www.loc.gov/" + format + "/?c=5&fo=json&q=" + queryStr;
 
     fetch(urlStr)
@@ -26,31 +28,44 @@ function getSearchResults(){
 
 }
 function displayResults(){
+
+  var resultsArr = resultsJsn.content.results;
+  console.log(resultsArr)
+
+  $('#results').empty();
+
+  for(i = 0; i < resultsArr.length; i++) {
     
     var cardEl = $('<div>').addClass("card");
     var headerEl = $("<div>").addClass("card-header");
     var cardbodyEl = $('<div>').addClass("card-body");
     var cardtitelEl = $('<h5>').addClass("card-title");
-    var cardtext = $('<p>').addClass("card-text");
+    var cardtextEl = $('<p>').addClass("card-text");
+    var dateTextEl = $('<p>').addClass("card-text");
+    var descTextEl = $('<p>').addClass("card-text");
+    
+    if(resultsArr[i].date) {
+      dateTextEl.text("Date: " + resultsArr[i].date);
+    }
+   
+    if(resultsArr[i].description) {
+      descTextEl.text("Description: " + resultsArr[i].description);
+    }
 
-    headerEl.text(resultsJsn.content.results[0].title);
-    cardtitelEl.text("Subjects: " + resultsJsn.content.results[0].subject.join(", "));
-
-    cardbodyEl.append(cardtitelEl).append(cardtext);
+    if(resultsArr[i].subject) {
+      cardtextEl.text("Subjects: " + resultsArr[i].subject.join(", "));
+    }
+    
+    cardtitelEl.text(resultsArr[i].title);
+    headerEl.append(cardtitelEl);
+    cardbodyEl.append(dateTextEl).append(descTextEl).append(cardtextEl);
     cardEl.append(headerEl).append(cardbodyEl);
-
     resultsEl.append(cardEl);
+  }
 
-/* <div class="card">
-  <div class="card-header">
-    Featured
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div> */
+  $('#back').on('click', function(){
+    location.assign('./index.html');
+  });
 }
 
 $(function(){
