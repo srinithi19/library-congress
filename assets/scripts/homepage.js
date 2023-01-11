@@ -7,8 +7,11 @@ function getUrlString() {
     
     searchString = searchString.split(" ").join("-");
 
-    let urlStr = "https://www.loc.gov/" + format + "/?c=5&fo=json&q=" + searchString;
+
+    // "https://www.loc.gov/"
+    let urlStr = "./results.html?formatType=" + format + "&q=" + searchString;
     console.log(urlStr);
+    location.assign(urlStr);
     return urlStr;
 }
 
